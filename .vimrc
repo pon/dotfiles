@@ -37,12 +37,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " color schemes
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'tomasr/molokai'
-Bundle 'vim-scripts/Skittles-Dark'
-Bundle 'sickill/vim-monokai'
-Bundle 'hukl/Smyck-Color-Scheme'
-Bundle 'vim-scripts/wombat256.vim'
 
 " plugins
 Bundle 'mileszs/ack.vim'
@@ -66,17 +60,11 @@ Bundle 'godlygeek/tabular'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'marijnh/tern_for_vim'
 Bundle 'ervandew/supertab'
-" Bundle 'SirVer/ultisnips'
 
 " syntax files
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'tpope/vim-markdown'
 Bundle 'voithos/vim-python-syntax'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-haml'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'wavded/vim-stylus'
 
 " checksyntax config
 let g:checksyntax#auto_mode = 0
@@ -178,12 +166,6 @@ set wildmode=list:longest
 " close buffer when tab is closed
 set nohidden
 
-" better moving between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
 " shortcuts to common commands
 let mapleader = ","
 nnoremap <leader>a :Ack
@@ -210,37 +192,12 @@ nnoremap <leader>tgt :set cursorcolumn! cursorline!<CR>
 nnoremap ; :
 nnoremap : ;
 
-"swap areas of text
-vnoremap <C-X> <Esc>`.``gvP``P
-
 " remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
-
-" also autosave when going to insert mode
-inoremap kj <Esc>:w<CR>
-inoremap jk <Esc>:w<CR>
 
 " more logical vertical navigation
 nnoremap <silent> k gk
 nnoremap <silent> j gj
-
-" compile coffee into js
-function! BrewCoffee()
-  silent! !coffee -p % &> /tmp/coffeetmp.js
-  sview /tmp/coffeetmp.js
-endfunc
-
-" make copy/pasting nice
-function! ToggleMouse()
-    if &mouse == 'a'
-        set mouse=r
-        set nonu
-    else
-        set mouse=a
-        set nu
-    endif
-endfunction
-nnoremap <leader>m :call ToggleMouse()<CR>
 
 " statusline
 set laststatus=2
