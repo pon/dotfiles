@@ -10,7 +10,7 @@
 "   ,l: toggle NERDTree
 "   ,h: open a shell in a new tab
 "   ,k: syntax-check the current file
-"   ,m: toggle mouse support
+"   ,m: run mocha
 "   ,p: toggle paste mode
 "   ,o: open file
 "   ,s: split window
@@ -32,39 +32,56 @@ set nocompatible
 
 " vundle
 filetype off
-set rtp+=~/dotfiles/vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " color schemes
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'tomasr/molokai'
+Bundle 'vim-scripts/Skittles-Dark'
+Bundle 'sickill/vim-monokai'
+Bundle 'vim-scripts/wombat256.vim'
+Bundle 'brendonrapp/smyck-vim'
+Bundle 'w0ng/vim-hybrid'
+Bundle 'gosukiwi/vim-atom-dark'
+Bundle 'rakr/vim-one'
 
 " plugins
-Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
 Bundle 'tomtom/checksyntax_vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-vinegar'
 Bundle 'tpope/vim-fugitive'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'vim-scripts/trailing-whitespace'
 Bundle 'vim-scripts/taglist.vim'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'kshenoy/vim-signature'
-Bundle 'michaeljsmith/vim-indent-object'
-Bundle 'raimondi/delimitMate'
 Bundle 'gregsexton/gitv'
 Bundle 'godlygeek/tabular'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'suan/vim-instant-markdown'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'marijnh/tern_for_vim'
-Bundle 'ervandew/supertab'
+Bundle 'freitass/todo.txt-vim'
+Bundle 'tpope/vim-speeddating'
+Bundle 'jceb/vim-orgmode'
+Bundle 'mtth/scratch.vim'
 
 " syntax files
-Bundle 'jelera/vim-javascript-syntax'
+" Bundle 'jelera/vim-javascript-syntax'
+Bundle 'othree/yajs.vim'
+Bundle 'elzr/vim-json'
 Bundle 'tpope/vim-markdown'
 Bundle 'voithos/vim-python-syntax'
+Bundle 'nono/vim-handlebars'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'mxw/vim-jsx'
+Bundle 'pangloss/vim-javascript'
 
 " checksyntax config
 let g:checksyntax#auto_mode = 0
@@ -75,6 +92,7 @@ let g:Tlist_Use_Right_Window = 1
 " airline config
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='one'
 
 " syntax highlighting and auto-indentation
 syntax on
@@ -104,8 +122,12 @@ au FocusLost * silent! wa
 set autowriteall
 
 " buffer navigation
-nnoremap <silent> <tab> <C-i>
+nnoremap <silent> <leader><tab> <C-i>
 nnoremap <silent> <S-tab> <C-o>
+
+" tab navigation
+noremap <S-tab> :tabprevious<CR>
+noremap <tab> :tabnext<CR>
 
 " leave showtabline as default (for now)
 set showtabline=1
@@ -152,7 +174,7 @@ set mouse=a
 
 " cursor
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let &t_EI = "\<Esc>]50;CursorShape=6\x7"
 
 " word wrapping
 set wrap
@@ -166,38 +188,75 @@ set wildmode=list:longest
 " close buffer when tab is closed
 set nohidden
 
+" better moving between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
 " shortcuts to common commands
 let mapleader = ","
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ag
 nnoremap <leader>b :TlistToggle<CR>
 nnoremap <leader>c :TComment<CR>
 nnoremap <leader>C :TCommentBlock<CR>
 vnoremap <leader>c :TComment<CR>
 vnoremap <leader>C :TCommentBlock<CR>
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 nnoremap <leader>nt :tabnew<CR>:CtrlP<CR>
 nnoremap <leader>h :tabnew<CR>:ConqueTerm bash<CR>
 nnoremap <leader>l :NERDTreeTabsToggle<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <leader>k :CheckSyntax<CR>
 nnoremap <leader>o :CtrlP<CR>
 nnoremap <leader>p :set invpaste<CR>
+nnoremap <leader>m :! mocha %<CR>
 nnoremap <leader>t :tabnew<CR>
-nnoremap <leader>s :vsplit<CR>
+nnoremap <leader>e :! eslint %<CR>
 nnoremap <leader>hs :split<CR>
 nnoremap <leader>w :tabclose<CR>
 nnoremap <leader>ed :tabnew ~/.vimrc<cr>
 nnoremap <leader>src :source ~/.vimrc<cr>
 nnoremap <leader>tgt :set cursorcolumn! cursorline!<CR>
+nnoremap <leader>gt :! ./go test<CR>
+nnoremap <leader>gtc :! ./go test-cov<CR>
 
 " ; is better than :, and kj is better than ctrl-c
 nnoremap ; :
 nnoremap : ;
 
+"swap areas of text
+vnoremap <C-X> <Esc>`.``gvP``P
+
+" new tab
+
 " remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
+" also autosave when going to insert mode
+inoremap kj <Esc>:w<CR>
+inoremap jk <Esc>:w<CR>
 
 " more logical vertical navigation
 nnoremap <silent> k gk
 nnoremap <silent> j gj
+
+" compile coffee into js
+function! BrewCoffee()
+  silent! !coffee -p % &> /tmp/coffeetmp.js
+  sview /tmp/coffeetmp.js
+endfunc
+
+" make copy/pasting nice
+function! ToggleMouse()
+    if &mouse == 'a'
+        set mouse=r
+        set nonu
+    else
+        set mouse=a
+        set nu
+    endif
+endfunction
 
 " statusline
 set laststatus=2
@@ -205,6 +264,8 @@ set laststatus=2
 " ctrl p settings
 " Ignore some folders and files for CtrlP indexing
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|log\|tmp$',
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp$|coverage\',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
+
+let g:NERDTreeWinSize = 40

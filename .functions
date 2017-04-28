@@ -1,4 +1,0 @@
-# git functions
-function get_git_branch() {
-  echo `git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-}
