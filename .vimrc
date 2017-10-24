@@ -137,3 +137,13 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp$|coverage\',
   \ 'file': '\.so$\|\.dat$|\.DS_Store$'
   \ }
+
+augroup ft_javascript
+  autocmd!
+
+  autocmd FileType javascript setlocal foldmethod=syntax
+
+  " Make {<cr> insert a pair of brackets in such a way that the cursor is correctly
+  " positioned inside of them AND the following code doesn't get unfolded.
+  autocmd Filetype javascript inoremap <buffer> {<cr> {}<left><cr><space><space>.<cr><esc>kA<bs>
+augroup END
