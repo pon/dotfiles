@@ -5,7 +5,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/goyo.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'ternjs/tern_for_vim'
+Plug 'jelera/vim-javascript-syntax'
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -15,6 +16,7 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
+Plug 'Valloric/YouCompleteMe'
 
 call plug#end()
 
