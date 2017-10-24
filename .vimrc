@@ -132,3 +132,8 @@ if !isdirectory(expand(&directory))
 endif
 
 let g:NERDTreeWinSize = 40
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.yardoc\|node_modules\|dist\|log\|tmp$|coverage\',
+  \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+  \ }
