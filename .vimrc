@@ -17,6 +17,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-vinegar'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -74,6 +76,7 @@ inoremap kj <Esc>:w<CR>
 inoremap jk <Esc>:w<CR>
 
 nnoremap <leader>l :NERDTreeToggle<CR>
+nnoremap <leader>a :Ack
 
 nnoremap ; :
 nnoremap : ;
