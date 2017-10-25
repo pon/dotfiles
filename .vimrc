@@ -26,7 +26,7 @@ set wildmode=list:longest
 set esckeys
 set ttyfast
 set background=dark
-colorscheme Tomorrow-Night-Eighties
+colorscheme Molokai
 set t_Co=256
 set number
 set relativenumber
@@ -91,7 +91,7 @@ autocmd VimResized * wincmd =
 
 highlight ColorColumn ctermbg=237 guibg=#3a3a3a
 
-highlight Comment cterm=italic
+highlight Comment cterm=bold
 
 set cursorline
 augroup cline
