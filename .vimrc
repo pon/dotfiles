@@ -28,10 +28,9 @@ set wildmode=list:longest
 set esckeys
 set ttyfast
 set background=dark
-colorscheme Molokai
+colorscheme molokai
 set t_Co=256
 set number
-set relativenumber
 set expandtab
 set shiftround
 set smartindent
