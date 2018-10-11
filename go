@@ -17,6 +17,10 @@ function tmuxsetup {
 function gitsetup {
   git config --global user.name "Peter Nagel"
   git config --global user.email "pnagel5@gmail.com"
+  git config --global core.editor vim
+  git config --global alias.pl pull
+  git config --global alias.gp push
+  git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 }
 
 vimsetup
