@@ -14,5 +14,11 @@ function tmuxsetup {
   cp ./.tmux.conf ~/.tmux.conf
 }
 
+function gitsetup {
+  git config --global user.name "Peter Nagel"
+  git config --global user.email "pnagel5@gmail.com"
+}
+
 vimsetup
 tmuxsetup
+gitsetup
