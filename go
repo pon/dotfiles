@@ -10,4 +10,9 @@ function vimsetup {
  vim +PlugInstall +qall
 }
 
+function tmuxsetup {
+  cp ./.tmux.conf ~/.tmux.conf
+}
+
 vimsetup
+tmuxsetup
