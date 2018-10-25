@@ -11,7 +11,12 @@ function vimsetup {
 }
 
 function tmuxsetup {
+  brew install tmux
   cp ./.tmux.conf ~/.tmux.conf
+}
+
+function zshsetup {
+  cp ./.zshrc ~/.zshrc
 }
 
 function gitsetup {
@@ -23,6 +28,8 @@ function gitsetup {
   git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 }
 
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 vimsetup
 tmuxsetup
 gitsetup
+zshsetup
